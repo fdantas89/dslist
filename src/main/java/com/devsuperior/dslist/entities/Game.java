@@ -22,25 +22,34 @@ public class Game {
 	
 	@Column(name = "game_year")/* Customiza o nome do campo no banco de dados */ 
 	private Integer year;
+	
+	@Column(name = "genre")
 	private String genere;
-	private String plataform;
+	
+	private String platforms;
+	private double score;
 	private String imgUrl;
-	private String ShortDescription;
-	private String lomgDescription; 
+	
+	@Column(columnDefinition = "TEXT") /*Ajuste o campo para texto mais que 255 caracteres*/
+	private String shortDescription;
+	
+	@Column(columnDefinition = "TEXT") /*Ajuste o campo para texto mais que 255 caracteres*/
+	private String longDescription; 
 	
 	public Game() {
 	}
 
-	public Game(Long id, String title, Integer year, String genere, String plataform, String imgUrl,
+	public Game(Long id, String title, Integer year, String genere, String platforms, Double score,String imgUrl,
 			String shortDescription, String lomgDescription) {
 		this.id = id;
 		this.title = title;
 		this.year = year;
 		this.genere = genere;
-		this.plataform = plataform;
+		this.platforms = platforms;
+		this.score = score;
 		this.imgUrl = imgUrl;
-		ShortDescription = shortDescription;
-		this.lomgDescription = lomgDescription;
+		shortDescription = shortDescription;
+		this.longDescription = lomgDescription;
 	}
 
 	public Long getId() {
@@ -75,12 +84,20 @@ public class Game {
 		this.genere = genere;
 	}
 
-	public String getPlataform() {
-		return plataform;
+	public String getPlatform() {
+		return platforms;
 	}
 
-	public void setPlataform(String plataform) {
-		this.plataform = plataform;
+	public void setplatforms(String platforms) {
+		this.platforms = platforms;
+	}
+	
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
 	}
 
 	public String getImgUrl() {
@@ -92,19 +109,19 @@ public class Game {
 	}
 
 	public String getShortDescription() {
-		return ShortDescription;
+		return shortDescription;
 	}
 
 	public void setShortDescription(String shortDescription) {
-		ShortDescription = shortDescription;
+		shortDescription = shortDescription;
 	}
 
 	public String getLomgDescription() {
-		return lomgDescription;
+		return longDescription;
 	}
 
 	public void setLomgDescription(String lomgDescription) {
-		this.lomgDescription = lomgDescription;
+		this.longDescription = lomgDescription;
 	}
 
 	@Override
