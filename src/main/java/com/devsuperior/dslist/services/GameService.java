@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.dslist.GameMinProjection;
 import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameMinDto;
 import com.devsuperior.dslist.entities.Game;
@@ -30,6 +31,13 @@ public class GameService {
 		List<Game> result = gameRepository.findAll(); //Busca todos os games no banco de dados findAll ja executa a query e retorna os dados
 		List<GameMinDto> dto = result.stream().map(x -> new GameMinDto(x)).toList();
 		return dto;
+	}
+	
+	@Transactional(readOnly = true) //não bloqueia o banco de dados para escrita, deixando a consulta mais rapida
+	public List<GameMinDto> findByList(Long listId) {
+		List<GameMinProjection> result = gameRepository.searchByList(listId); //Busca todos os games no banco de dados findAll ja executa a query e retorna os dados
+		return result.stream().map(x -> new GameMinDto(x)).toList();
+		
 	}
 
 }
